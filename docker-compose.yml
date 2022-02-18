@@ -1,11 +1,28 @@
 version: "3"
 
 services:
+  postgres:
+    image: postgres:14
+    restart: always
+    ports:
+       - "5432:5432"
+    env_file:
+      - ./env_example
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
   backend:
     build: .
     restart: always
-    command: python3 main.py
+    command: python3 -m tornado.autoreload main.py
     ports:
       - "9001:9001"
     volumes:
       - ./app:/usr/src/app/
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    env_file:
+      - ./env_example
+volumes:
+  pgdata:
