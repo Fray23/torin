@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  backend:
+    build: .
+    restart: always
+    command: python3 main.py
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./app:/usr/src/app/
