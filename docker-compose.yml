@@ -15,7 +15,7 @@ services:
     restart: always
     command: python3 -m tornado.autoreload main.py
     ports:
-      - "9001:9001"
+      - "9099:9001"
     volumes:
       - ./app:/usr/src/app/
     links:
